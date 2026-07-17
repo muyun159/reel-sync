@@ -412,9 +412,10 @@ export default {
       }
 
       this.shared.app.roomID = id.raw;
-      this.shared.peers.local.data = new Peer(id.data, cfg ? { config: cfg } : null);
-      this.shared.peers.local.video = new Peer(id.video, cfg ? { config: cfg } : null);
-      this.shared.peers.local.audio = new Peer(id.audio, cfg ? { config: cfg } : null);
+      const fallbackCfg = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+      this.shared.peers.local.data = new Peer(id.data, { config: cfg || fallbackCfg });
+      this.shared.peers.local.video = new Peer(id.video, { config: cfg || fallbackCfg });
+      this.shared.peers.local.audio = new Peer(id.audio, { config: cfg || fallbackCfg });
       this.$router.push("/stream");
     },
 
@@ -432,9 +433,10 @@ export default {
       }
 
       this.shared.app.guestID = id.raw;
-      this.shared.peers.local.data = new Peer(id.data, cfg ? { config: cfg } : null);
-      this.shared.peers.local.video = new Peer(id.video, cfg ? { config: cfg } : null);
-      this.shared.peers.local.audio = new Peer(id.audio, cfg ? { config: cfg } : null);
+      const fallbackCfg = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+      this.shared.peers.local.data = new Peer(id.data, { config: cfg || fallbackCfg });
+      this.shared.peers.local.video = new Peer(id.video, { config: cfg || fallbackCfg });
+      this.shared.peers.local.audio = new Peer(id.audio, { config: cfg || fallbackCfg });
       this.$router.push("/stream");
     },
 
