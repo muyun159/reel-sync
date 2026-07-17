@@ -413,9 +413,16 @@ export default {
 
       this.shared.app.roomID = id.raw;
       const fallbackCfg = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
-      this.shared.peers.local.data = new Peer(id.data, { config: cfg || fallbackCfg });
-      this.shared.peers.local.video = new Peer(id.video, { config: cfg || fallbackCfg });
-      this.shared.peers.local.audio = new Peer(id.audio, { config: cfg || fallbackCfg });
+      const peerOpts = {
+        config: cfg || fallbackCfg,
+        host: import.meta.env.VITE_PEERJS_HOST || undefined,
+        port: import.meta.env.VITE_PEERJS_PORT || undefined,
+        path: import.meta.env.VITE_PEERJS_PATH || undefined,
+      };
+      Object.keys(peerOpts).forEach(k => peerOpts[k] === undefined && delete peerOpts[k]);
+      this.shared.peers.local.data = new Peer(id.data, peerOpts);
+      this.shared.peers.local.video = new Peer(id.video, peerOpts);
+      this.shared.peers.local.audio = new Peer(id.audio, peerOpts);
       this.$router.push("/stream");
     },
 
@@ -434,9 +441,16 @@ export default {
 
       this.shared.app.guestID = id.raw;
       const fallbackCfg = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
-      this.shared.peers.local.data = new Peer(id.data, { config: cfg || fallbackCfg });
-      this.shared.peers.local.video = new Peer(id.video, { config: cfg || fallbackCfg });
-      this.shared.peers.local.audio = new Peer(id.audio, { config: cfg || fallbackCfg });
+      const peerOpts = {
+        config: cfg || fallbackCfg,
+        host: import.meta.env.VITE_PEERJS_HOST || undefined,
+        port: import.meta.env.VITE_PEERJS_PORT || undefined,
+        path: import.meta.env.VITE_PEERJS_PATH || undefined,
+      };
+      Object.keys(peerOpts).forEach(k => peerOpts[k] === undefined && delete peerOpts[k]);
+      this.shared.peers.local.data = new Peer(id.data, peerOpts);
+      this.shared.peers.local.video = new Peer(id.video, peerOpts);
+      this.shared.peers.local.audio = new Peer(id.audio, peerOpts);
       this.$router.push("/stream");
     },
 
