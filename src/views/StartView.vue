@@ -404,15 +404,18 @@ export default {
       const id = new PeerID().id;
 
       if (!cfg) {
-        mduiSnackbar({
-          message: this.$t("StartView.messages.turnNodeError"),
-          closeOnOutsideClick: true,
-        });
-        this.shared.app.isConnectionRestricted = true;
+        msg.w("No TURN server configured, falling back to public STUN servers.");
       }
 
       this.shared.app.roomID = id.raw;
-      const fallbackCfg = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+      const fallbackCfg = {
+        iceServers: [
+          { urls: "stun:stun.miwifi.com:3478" },
+          { urls: "stun:stun.qq.com:3478" },
+          { urls: "stun:stun.chat.bilibili.com:3478" },
+          { urls: "stun:stun.l.google.com:19302" },
+        ],
+      };
       const peerOpts = {
         config: cfg || fallbackCfg,
         host: import.meta.env.VITE_PEERJS_HOST || undefined,
@@ -432,15 +435,18 @@ export default {
       const id = new PeerID().id;
 
       if (!cfg) {
-        mduiSnackbar({
-          message: this.$t("StartView.messages.turnNodeError"),
-          closeOnOutsideClick: true,
-        });
-        this.shared.app.isConnectionRestricted = true;
+        msg.w("No TURN server configured, falling back to public STUN servers.");
       }
 
       this.shared.app.guestID = id.raw;
-      const fallbackCfg = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+      const fallbackCfg = {
+        iceServers: [
+          { urls: "stun:stun.miwifi.com:3478" },
+          { urls: "stun:stun.qq.com:3478" },
+          { urls: "stun:stun.chat.bilibili.com:3478" },
+          { urls: "stun:stun.l.google.com:19302" },
+        ],
+      };
       const peerOpts = {
         config: cfg || fallbackCfg,
         host: import.meta.env.VITE_PEERJS_HOST || undefined,

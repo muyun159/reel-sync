@@ -54,5 +54,9 @@ export default defineConfig(({ mode }) => {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
+    // 允许通过 Cloudflare 临时隧道访问本地预览（仅供本地预览，不影响 dist 产物）
+    preview: {
+      allowedHosts: [".trycloudflare.com"],
+    },
   };
 });
